@@ -69,12 +69,10 @@ function keyPressed() {
 }
 
 function touchStarted() {
-  if (key === ' ') {
-    if (timerStarted == true) {
-      keyStopped = true;
-      scram1 = sc.genScram();
-	  justSolved = true;
-    }
+  if (timerStarted == true) {
+    keyStopped = true;
+    scram1 = sc.genScram();  
+	justSolved = true;
   }
 }
 
@@ -93,15 +91,13 @@ function keyReleased() {
 }
 
 function touchEnded() {
-  if (key === ' ') {
-    if (timerStarted == false) {
-      timerStarted = true;
-      keyStopped = false;
-      counter = 0;
-      seconds = 0;
-      minutes = 0;
-    } else {
-      timerStarted = false;
-    }
+  if (timerStarted == false) {
+    timerStarted = true;
+    keyStopped = false;
+    counter = 0;
+    seconds = 0;
+    minutes = 0;
+  } else {
+    timerStarted = false;
   }
 }
