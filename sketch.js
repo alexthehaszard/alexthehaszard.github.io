@@ -90,6 +90,14 @@ function keyReleased() {
   }
 }
 
+function mousePressed() {
+  return;
+}
+
+function mouseReleased() {
+  return;
+}
+
 function touchEnded() {
   if (timerStarted == false) {
     timerStarted = true;
