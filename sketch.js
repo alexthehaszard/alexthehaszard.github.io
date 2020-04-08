@@ -7,17 +7,21 @@ let timerStarted = false; //tell the draw loop whether or not the timer has star
 let keyStopped = false; //used to stop the timer from starting itself when it is stopped
 let justSolved = false; //used to tell the draw loop to log the time in console
 let scram1; //the scramble
-let current_time; //the time formatted
+let current_time; //the full time formatted
+let times = [];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   setInterval(timer, 10);
   sc = new scramble();  //create the scramble function
   scram1 = sc.genScram(); //generate first scramble
+  for (let i = 0; i < localStorage.length; i++) {
+    times[i] = localStorage.getItem(i);
+  }
 }
 
 function draw() {
-  background(51);
+  background(50);
   fill(255);
   textFont("Arial");
   textSize(windowWidth / 8);
@@ -25,15 +29,17 @@ function draw() {
   new_seconds = String(seconds).padStart(2, '0'); //make the seconds always have 2 digits
   new_counter = String(counter).padStart(2, '0'); //make the counters always have 2 digits
   if (minutes > 0) {
-	current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
+	  current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
     text(current_time, width / 2, height / 2);
   } else {
-	current_time = seconds + "." + new_counter;
+	  current_time = seconds + "." + new_counter;
     text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
   }
   if (justSolved == true) {
-	console.log(current_time); //log the previous time when it has been solved
-	justSolved = false; //stop the if statement from being called again
+    localStorage.setItem((localStorage.length).toString(), current_time);
+    console.log((localStorage.length - 1) + " " + localStorage.getItem((localStorage.length - 1).toString()));
+    console.log(current_time); //log the previous time when it has been solved
+    justSolved = false; //stop the if statement from being called again
   }
   sc.show(scram1); //show the scramble text
 }
@@ -61,16 +67,16 @@ function keyPressed() {
     if (timerStarted == true) {
       keyStopped = true; //if the timer is started then stop the timer
       scram1 = sc.genScram(); //generate a new scramble
-	  justSolved = true; //tell the draw loop to output the solve to the console
+	    justSolved = true; //tell the draw loop to output the solve to the console
     }
   }
 }
 
 function touchStarted() { //same as keyPressed for mobile
   if (timerStarted == true) {
-    keyStopped = true; 
-    scram1 = sc.genScram();  
-	justSolved = true;
+    keyStopped = true;
+    scram1 = sc.genScram();
+	  justSolved = true;
   }
 }
 
