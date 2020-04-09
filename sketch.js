@@ -112,6 +112,12 @@ function keyPressed() {
     scramType = "3x3";
     scram1 = sc2.genScram(scramLength, scramMoves);
   }
+  if (key === '4') {
+    scramLength = 38; //changes scramble type to 4x4
+    scramMoves = 9;
+    scramType = "4x4";
+    scram1 = sc2.genScram(scramLength, scramMoves);
+  }
 }
 
 function touchStarted() { //same as keyPressed for mobile
