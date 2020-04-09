@@ -14,6 +14,8 @@ let times = [];
 let scramLength = 20;
 let scram2;
 let scramMoves = 6;
+let scramType = "3x3";
+let oldScram = "";
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -49,8 +51,9 @@ function draw() {
   }
 
   if (justSolved == true) {
-    localStorage.setItem((localStorage.length).toString(), current_time);
-    console.log((localStorage.length - 1) + " " + localStorage.getItem((localStorage.length - 1).toString()));
+    localStorage.setItem(localStorage.length, scramType + " " + current_time);
+    console.log("solve: " + (localStorage.length) + " " + localStorage.getItem(localStorage.length - 1));
+    times[localStorage.length - 1] = localStorage.getItem(localStorage.length - 1);
     console.log(current_time); //log the previous time when it has been solved
     justSolved = false; //stop the if statement from being called again
   }
@@ -79,6 +82,7 @@ function keyPressed() {
   if (key === ' ') { //if the key is spacebar
     if (timerStarted == true) {
       keyStopped = true; //if the timer is started then stop the timer
+      oldScram = scram1;
       scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
 	    justSolved = true; //tell the draw loop to output the solve to the console
     }
@@ -86,11 +90,13 @@ function keyPressed() {
   if (key === '2') {
     scramLength = 8;
     scramMoves = 3;
+    scramType = "2x2";
     scram1 = sc2.genScram(scramLength, scramMoves);
   }
   if (key === '3') {
     scramLength = 20;
     scramMoves = 6;
+    scramType = "3x3";
     scram1 = sc2.genScram(scramLength, scramMoves);
   }
 }

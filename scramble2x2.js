@@ -10,7 +10,6 @@ function scramble() {
         let moves = ["R", "U", "F", "L", "D", "B"];
         let final = "";
         for(let i = 1; i <= scLength; i++) {
-            
             for (let j = 0; j < moveNum; j++) {
                 let ran = Math.floor(Math.random() * 7);
                 if (moveNum <= 3) {
@@ -18,13 +17,15 @@ function scramble() {
                         scram[i] = moves[j];
                     }
                 } else if (moveNum > 3) {
-                    if (scram.length > 3) {
-                        if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j+3] && scram[i-2] != moves[j-3]) {
+                    if (scram.length >= 3) {
+                        if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j] && scram[i-2] != moves[j]) {
                             scram[i] = moves[j];
+                            console.log("after");
                         }
-                    } else if (scram.length <= 3) {
-                        if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j+3]) {
+                    } else if (scram.length < 3) {
+                        if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j]) {
                             scram[i] = moves[j];
+                            console.log("before");
                         }
                     } else {
                         j--;
