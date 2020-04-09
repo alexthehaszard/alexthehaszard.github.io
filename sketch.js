@@ -16,10 +16,17 @@ let scram2;
 let scramMoves = 6;
 let scramType = "3x3";
 let oldScram = "";
+let red = "#ff0000";
+let green = "#00ff00";
+let white = 255;
+let txtClr = white;
+let strtTmr = 0;
+let testing = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   setInterval(timer, 10);
+  setInterval(startTimer, 100); //sets up the colors for the timer
 
   sc2 = new scramble();
   scram1 = sc2.genScram(scramLength, scramMoves);
@@ -34,7 +41,7 @@ function draw() {
   textFont("Arial");
   textSize(windowWidth / 8);
   textAlign("center");
-  fill(255);
+  fill(txtClr);
   new_seconds = String(seconds).padStart(2, '0'); //make the seconds always have 2 digits
   new_counter = String(counter).padStart(2, '0'); //make the counters always have 2 digits
   new_minutes = String(minutes).padStart(2, '0'); //make the minutes always have 2 digits
@@ -57,6 +64,7 @@ function draw() {
     console.log(current_time); //log the previous time when it has been solved
     justSolved = false; //stop the if statement from being called again
   }
+  fill(white);
   sc2.show(scram1); //show the scramble text
 }
 
@@ -85,16 +93,21 @@ function keyPressed() {
       oldScram = scram1;
       scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
 	    justSolved = true; //tell the draw loop to output the solve to the console
+    } else {
+      strtTmr = 0;
+      txtClr = red;
+      testing = true;
+      startTimer();
     }
   }
   if (key === '2') {
-    scramLength = 8;
+    scramLength = 8; //changes scramble type to 2x2
     scramMoves = 3;
     scramType = "2x2";
     scram1 = sc2.genScram(scramLength, scramMoves);
   }
   if (key === '3') {
-    scramLength = 20;
+    scramLength = 20; //changes scramble type to 3x3
     scramMoves = 6;
     scramType = "3x3";
     scram1 = sc2.genScram(scramLength, scramMoves);
@@ -111,14 +124,18 @@ function touchStarted() { //same as keyPressed for mobile
 
 function keyReleased() {
   if (key === ' ') { //if the key is spacebar
-    if (timerStarted == false) {
+    if (timerStarted == false && txtClr == green) {
+      txtClr = white;
       timerStarted = true; //if the timer is not started start the timer
       keyStopped = false; //when the key is pressed to stop the timer this is used to make sure that is will not start again when the key is released
       counter = 0; //reset the timer
       seconds = 0;
       minutes = 0;
-    } else {
+    } else if (timerStarted == true && txtClr == white) {
       timerStarted = false; //stop the timer
+    } else if (txtClr == red) {
+      testing = false;
+      txtClr = white;
     }
   }
 }
@@ -141,4 +158,13 @@ function mousePressed() { //the mobile controls are automatically bound to mouse
 
 function mouseReleased() {
   return;
+}
+
+function startTimer() {
+  strtTmr++;
+  if (strtTmr == 5) {
+    if (testing == true) {
+      txtClr = green; //changes the color of the timer when it is ready
+    }
+  }
 }
