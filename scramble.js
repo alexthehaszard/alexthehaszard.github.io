@@ -20,12 +20,10 @@ function scramble() {
                     if (scram.length >= 3) {
                         if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j] && scram[i-2] != moves[j]) {
                             scram[i] = moves[j];
-                            console.log("after");
                         }
                     } else if (scram.length < 3) {
                         if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j]) {
                             scram[i] = moves[j];
-                            console.log("before");
                         }
                     } else {
                         j--;
@@ -34,12 +32,10 @@ function scramble() {
                     if (scram.length >= 3) {
                         if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j] && scram[i-2] != moves[j]) {
                             scram[i] = moves[j];
-                            console.log("after");
                         }
                     } else if (scram.length < 3) {
                         if (ran == j && scram[i-1] != moves[j] && scram[i-2] != moves[j]) {
                             scram[i] = moves[j];
-                            console.log("before");
                         }
                     } else {
                         j--;

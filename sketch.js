@@ -5,6 +5,11 @@ let new_seconds; //seconds reformatted
 let minutes = 0; //the minutes
 let new_minutes = 0; //minutes reformatted
 let hours = 0; //hours 
+let tcounter = 0; //counts the time
+let new_tcounter; //the counter reformatted to be displayed
+let tseconds = 0; //the seconds
+let new_tseconds; //seconds reformatted
+let tminutes = 0; //the minutes
 let timerStarted = false; //tell the draw loop whether or not the timer has started
 let keyStopped = false; //used to stop the timer from starting itself when it is stopped
 let justSolved = false; //used to tell the draw loop to log the time in console
@@ -22,11 +27,21 @@ let white = 255;
 let txtClr = white;
 let strtTmr = 0;
 let testing = false;
+let usingStack = true;
+var mic;
+let prevPacket;
+let timerTime;
+const stackmat = new Stackmat();
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   setInterval(timer, 10);
   setInterval(startTimer, 100); //sets up the colors for the timer
+
+  mic = new p5.AudioIn();
+  mic.start();
+
+  stackmat.start();
 
   sc2 = new scramble();
   scram1 = sc2.genScram(scramLength, scramMoves);
@@ -35,6 +50,14 @@ function setup() {
     times[i] = localStorage.getItem(i);
   }
 }
+
+// stackmat.on('started', packet => {
+//   stackmatTimer.show(stackmat);
+// })
+
+// stackmat.on('stopped', packet => {
+//   console.log("timer stopped");
+// })
 
 function draw() {
   background(50);
@@ -45,16 +68,41 @@ function draw() {
   new_seconds = String(seconds).padStart(2, '0'); //make the seconds always have 2 digits
   new_counter = String(counter).padStart(2, '0'); //make the counters always have 2 digits
   new_minutes = String(minutes).padStart(2, '0'); //make the minutes always have 2 digits
+  new_tseconds = String(tseconds).padStart(2, '0'); //make the seconds always have 2 digits
+  new_tcounter = String(tcounter).padStart(2, '0'); //make the counters always have 2 digits
 
-  if (minutes > 0 && hours == 0) {
-	  current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
-    text(current_time, width / 2, height / 2);
-  } else  if (minutes < 1) {
-	  current_time = seconds + "." + new_counter;
-    text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
-  } else if (hours > 0) {
-    current_time = hours + ":" + new_minutes + ":" + new_seconds + "." + new_counter; //output the current time with hours if there has been more than one hour
-    text(current_time, width / 2, height / 2);
+  if (usingStack == true) {
+    if (timerStarted == false) {
+      if (tminutes > 0) {
+        current_time = tminutes + ":" + new_tseconds + "." + new_tcounter; //output the current time with minutes if there has been more than one minute
+        text(current_time, width / 2, height / 2 + windowWidth / 30);
+      } else  if (tminutes < 1) {
+        current_time = tseconds + "." + new_tcounter;
+        text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
+      }
+    } else {
+      if (minutes > 0 && hours == 0) {
+        current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
+        text(current_time, width / 2, height / 2 + windowWidth / 30);
+      } else  if (minutes < 1) {
+        current_time = seconds + "." + new_counter;
+        text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
+      } else if (hours > 0) {
+        current_time = hours + ":" + new_minutes + ":" + new_seconds + "." + new_counter; //output the current time with hours if there has been more than one hour
+        text(current_time, width / 2, height / 2 + windowWidth / 30);
+      }
+    }
+  } else {
+    if (minutes > 0 && hours == 0) {
+	    current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
+      text(current_time, width / 2, height / 2);
+    } else  if (minutes < 1) {
+	    current_time = seconds + "." + new_counter;
+      text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
+    } else if (hours > 0) {
+      current_time = hours + ":" + new_minutes + ":" + new_seconds + "." + new_counter; //output the current time with hours if there has been more than one hour
+      text(current_time, width / 2, height / 2);
+    }
   }
 
   if (justSolved == true) {
@@ -87,6 +135,7 @@ function timer() {
 }
 
 function keyPressed() {
+  getAudioContext().resume();
   if (key === ' ') { //if the key is spacebar
     if (timerStarted == true) {
       keyStopped = true; //if the timer is started then stop the timer
@@ -117,6 +166,17 @@ function keyPressed() {
     scramMoves = 9;
     scramType = "4x4";
     scram1 = sc2.genScram(scramLength, scramMoves);
+  }
+  if (key === 's') {
+    usingStack = true;
+    keyStopped = false;
+  }
+  if (key === 'c') {
+    usingStack = false;
+    counter = 0;
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
   }
 }
 
@@ -174,3 +234,28 @@ function startTimer() {
     }
   }
 }
+
+stackmat.on('packetReceived', function(packet) {
+  if (usingStack == true) {
+    timerTime = packet.timeInMilliseconds;
+    if (packet.timeInMilliseconds == prevPacket && timerStarted == true) {
+      timerStarted = false;
+      console.log('stopped');
+      justSolved = true;
+    }
+    tcounter = Math.trunc((timerTime % 1000) / 10);
+    tseconds = Math.trunc(timerTime / 1000);
+    if (tseconds > 59) {
+      tseconds = tseconds % 60;
+    }
+    tminutes = Math.trunc(timerTime / 60000);
+    prevPacket = packet.timeInMilliseconds;
+  }
+})
+
+stackmat.on('started', function(packet) {
+  timerStarted = true;
+  seconds = 0;
+  counter = 0;
+  minutes = 0;
+})
