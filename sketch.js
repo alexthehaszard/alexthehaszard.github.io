@@ -242,6 +242,7 @@ stackmat.on('packetReceived', function(packet) {
       timerStarted = false;
       console.log('stopped');
       justSolved = true;
+      scram1=sc2.genScram(scramLength, scramMoves);
     }
     tcounter = Math.trunc((timerTime % 1000) / 10);
     tseconds = Math.trunc(timerTime / 1000);
