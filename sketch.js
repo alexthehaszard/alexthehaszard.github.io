@@ -16,6 +16,8 @@ let justSolved = false; //used to tell the draw loop to log the time in console
 let scram1; //the scramble
 let current_time; //the full time formatted
 let times = [];
+let threeTimes = [];
+let twoTimes = [];
 let scramLength = 20;
 let scram2;
 let scramMoves = 6;
@@ -44,6 +46,13 @@ function setup() {
 
   for (let i = 0; i < localStorage.length; i++) {
     times[i] = localStorage.getItem(i);
+    if (times[i][0] == 3) {
+      threeTimes[threeTimes.length] = times[i];
+      console.log("threeTimes added" + threeTimes[threeTimes.length - 1]);
+    } else if (times[i][0] == 2) {
+      twoTimes[twoTimes.length] = times[i];
+      console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+    }
   }
 }
 
@@ -94,7 +103,7 @@ function draw() {
   }
 
   if (justSolved == true) {
-    localStorage.setItem(localStorage.length, scramType + " " + current_time);
+    localStorage.setItem(localStorage.length, scramType + " " + current_time + " " + oldScram);
     console.log("solve: " + (localStorage.length) + " " + localStorage.getItem(localStorage.length - 1));
     times[localStorage.length - 1] = localStorage.getItem(localStorage.length - 1);
     justSolved = false; //stop the if statement from being called again
@@ -239,6 +248,7 @@ stackmat.on('packetReceived', function(packet) {
     if (packet.timeInMilliseconds == prevPacket && timerStarted == true) {
       timerStarted = false;
       justSolved = true;
+      oldScram = scram1;
       scram1=sc2.genScram(scramLength, scramMoves);
     }
     tcounter = Math.trunc((timerTime % 1000) / 10);
