@@ -27,7 +27,7 @@ let white = 255;
 let txtClr = white;
 let strtTmr = 0;
 let testing = false;
-let usingStack = true;
+let usingStack = false;
 var mic;
 let prevPacket;
 let timerTime;
