@@ -28,7 +28,6 @@ let txtClr = white;
 let strtTmr = 0;
 let testing = false;
 let usingStack = false;
-var mic;
 let prevPacket;
 let timerTime;
 const stackmat = new Stackmat();
@@ -37,9 +36,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   setInterval(timer, 10);
   setInterval(startTimer, 100); //sets up the colors for the timer
-
-  mic = new p5.AudioIn();
-  mic.start();
 
   stackmat.start();
 
@@ -101,7 +97,6 @@ function draw() {
     localStorage.setItem(localStorage.length, scramType + " " + current_time);
     console.log("solve: " + (localStorage.length) + " " + localStorage.getItem(localStorage.length - 1));
     times[localStorage.length - 1] = localStorage.getItem(localStorage.length - 1);
-    console.log(current_time); //log the previous time when it has been solved
     justSolved = false; //stop the if statement from being called again
   }
   fill(white);
@@ -127,18 +122,19 @@ function timer() {
 }
 
 function keyPressed() {
-  getAudioContext().resume();
-  if (key === ' ') { //if the key is spacebar
-    if (timerStarted == true) {
-      keyStopped = true; //if the timer is started then stop the timer
-      oldScram = scram1;
-      scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
-	    justSolved = true; //tell the draw loop to output the solve to the console
-    } else {
-      strtTmr = 0;
-      txtClr = red;
-      testing = true;
-      startTimer();
+  if (usingStack == false) {
+    if (key === ' ') { //if the key is spacebar
+      if (timerStarted == true) {
+        keyStopped = true; //if the timer is started then stop the timer
+        oldScram = scram1;
+        scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
+        justSolved = true; //tell the draw loop to output the solve to the console
+      } else {
+        strtTmr = 0;
+        txtClr = red;
+        testing = true;
+        startTimer();
+      }
     }
   }
   if (key === '2') {
@@ -242,7 +238,6 @@ stackmat.on('packetReceived', function(packet) {
     timerTime = packet.timeInMilliseconds;
     if (packet.timeInMilliseconds == prevPacket && timerStarted == true) {
       timerStarted = false;
-      console.log('stopped');
       justSolved = true;
       scram1=sc2.genScram(scramLength, scramMoves);
     }
@@ -257,8 +252,10 @@ stackmat.on('packetReceived', function(packet) {
 })
 
 stackmat.on('started', function(packet) {
-  timerStarted = true;
-  seconds = 0;
-  counter = 0;
-  minutes = 0;
+  if (usingStack == true) {
+    timerStarted = true;
+    seconds = 0;
+    counter = 0;
+    minutes = 0;
+  }
 })
