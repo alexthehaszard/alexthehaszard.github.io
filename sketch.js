@@ -32,6 +32,9 @@ let testing = false;
 let usingStack = false;
 let prevPacket;
 let timerTime;
+let stats;
+let showSolve1;
+let showSolve2;
 const stackmat = new Stackmat();
 
 function setup() {
@@ -39,10 +42,16 @@ function setup() {
   setInterval(timer, 10);
   setInterval(startTimer, 100); //sets up the colors for the timer
 
+  stats = new Stats();
   stackmat.start();
 
-  sc2 = new scramble();
+  sc2 = new Scramble();
   scram1 = sc2.genScram(scramLength, scramMoves);
+
+  showSolve1 = localStorage.length - 1;
+  showSolve2 = localStorage.length - 2;
+
+  
 
   for (let i = 0; i < localStorage.length; i++) {
     times[i] = localStorage.getItem(i);
@@ -67,6 +76,8 @@ function draw() {
   new_minutes = String(minutes).padStart(2, '0'); //make the minutes always have 2 digits
   new_tseconds = String(tseconds).padStart(2, '0'); //make the seconds always have 2 digits
   new_tcounter = String(tcounter).padStart(2, '0'); //make the counters always have 2 digits
+
+  
 
   if (usingStack == true) {
     if (timerStarted == false) {
@@ -103,13 +114,18 @@ function draw() {
   }
 
   if (justSolved == true) {
-    localStorage.setItem(localStorage.length, scramType + " " + current_time + " " + oldScram);
+    localStorage.setItem(localStorage.length, scramType + "-" + current_time + "-" + oldScram);
     console.log("solve: " + (localStorage.length) + " " + localStorage.getItem(localStorage.length - 1));
     times[localStorage.length - 1] = localStorage.getItem(localStorage.length - 1);
+    showSolve1++;
+    showSolve2++;
     justSolved = false; //stop the if statement from being called again
   }
   fill(white);
   sc2.show(scram1); //show the scramble text
+  stats.show();
+  stats.showInfo();
+  stats.showStats(times[showSolve1], times[showSolve2]);
 }
 
 function windowResized() {
@@ -240,6 +256,12 @@ function startTimer() {
       txtClr = green; //changes the color of the timer when it is ready
     }
   }
+}
+
+function mouseClicked() {
+  let op = stats.previous(showSolve1, showSolve2);
+  showSolve1 = op[0];
+  showSolve2 = op[1];
 }
 
 stackmat.on('packetReceived', function(packet) {

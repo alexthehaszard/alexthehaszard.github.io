@@ -1,4 +1,4 @@
-function scramble() {
+function Scramble() {
     this.show = function(txt) {
         textAlign(CENTER); //setup the text for the scramble
         textSize(windowWidth / 30);
