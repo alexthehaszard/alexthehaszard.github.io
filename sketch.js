@@ -27,7 +27,7 @@ let white = 255;
 let txtClr = white;
 let strtTmr = 0;
 let testing = false;
-let usingStack = true;
+let usingStack = false;
 var mic;
 let prevPacket;
 let timerTime;
@@ -50,14 +50,6 @@ function setup() {
     times[i] = localStorage.getItem(i);
   }
 }
-
-// stackmat.on('started', packet => {
-//   stackmatTimer.show(stackmat);
-// })
-
-// stackmat.on('stopped', packet => {
-//   console.log("timer stopped");
-// })
 
 function draw() {
   background(50);
@@ -182,9 +174,15 @@ function keyPressed() {
 
 function touchStarted() { //same as keyPressed for mobile
   if (timerStarted == true) {
-    keyStopped = true;
-    scram1 = sc.genScram(scramLength);
-	  justSolved = true;
+    keyStopped = true; //if the timer is started then stop the timer
+    oldScram = scram1;
+    scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
+	  justSolved = true; //tell the draw loop to output the solve to the console
+  } else {
+    strtTmr = 0;
+    txtClr = red;
+    testing = true;
+    startTimer();
   }
 }
 
@@ -207,14 +205,18 @@ function keyReleased() {
 }
 
 function touchEnded() { //same as keyReleased for mobile
-  if (timerStarted == false) {
-    timerStarted = true;
-    keyStopped = false;
-    counter = 0;
+  if (timerStarted == false && txtClr == green) {
+    txtClr = white;
+    timerStarted = true; //if the timer is not started start the timer
+    keyStopped = false; //when the key is pressed to stop the timer this is used to make sure that is will not start again when the key is released
+    counter = 0; //reset the timer
     seconds = 0;
     minutes = 0;
-  } else {
-    timerStarted = false;
+  } else if (timerStarted == true && txtClr == white) {
+    timerStarted = false; //stop the timer
+  } else if (txtClr == red) {
+    testing = false;
+    txtClr = white;
   }
 }
 
