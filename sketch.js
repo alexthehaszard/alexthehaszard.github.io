@@ -18,6 +18,7 @@ let current_time; //the full time formatted
 let times = [];
 let threeTimes = [];
 let twoTimes = [];
+let fourTimes = [];
 let scramLength = 20;
 let scram2;
 let scramMoves = 6;
@@ -43,7 +44,6 @@ function setup() {
   setInterval(startTimer, 100); //sets up the colors for the timer
 
   stats = new Stats();
-  stackmat.start();
 
   sc2 = new Scramble();
   scram1 = sc2.genScram(scramLength, scramMoves);
@@ -51,16 +51,19 @@ function setup() {
   showSolve1 = localStorage.length - 1;
   showSolve2 = localStorage.length - 2;
 
-  
+
 
   for (let i = 0; i < localStorage.length; i++) {
     times[i] = localStorage.getItem(i);
     if (times[i][0] == 3) {
       threeTimes[threeTimes.length] = times[i];
-      console.log("threeTimes added" + threeTimes[threeTimes.length - 1]);
+      //console.log("threeTimes added" + threeTimes[threeTimes.length - 1]);
     } else if (times[i][0] == 2) {
       twoTimes[twoTimes.length] = times[i];
-      console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+      //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+    } else if (localStorage.getItem(localStorage.length - 1)[0] == 4) {
+      fourTimes[fourTimes.length] = localStorage.getItem(localStorage.length - 1);
+      //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
     }
   }
 }
@@ -77,14 +80,14 @@ function draw() {
   new_tseconds = String(tseconds).padStart(2, '0'); //make the seconds always have 2 digits
   new_tcounter = String(tcounter).padStart(2, '0'); //make the counters always have 2 digits
 
-  
+
 
   if (usingStack == true) {
     if (timerStarted == false) {
       if (tminutes > 0) {
         current_time = tminutes + ":" + new_tseconds + "." + new_tcounter; //output the current time with minutes if there has been more than one minute
         text(current_time, width / 2, height / 2 + windowWidth / 30);
-      } else  if (tminutes < 1) {
+      } else if (tminutes < 1) {
         current_time = tseconds + "." + new_tcounter;
         text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
       }
@@ -92,7 +95,7 @@ function draw() {
       if (minutes > 0 && hours == 0) {
         current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
         text(current_time, width / 2, height / 2 + windowWidth / 30);
-      } else  if (minutes < 1) {
+      } else if (minutes < 1) {
         current_time = seconds + "." + new_counter;
         text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
       } else if (hours > 0) {
@@ -102,10 +105,10 @@ function draw() {
     }
   } else {
     if (minutes > 0 && hours == 0) {
-	    current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
+      current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
       text(current_time, width / 2, height / 2);
-    } else  if (minutes < 1) {
-	    current_time = seconds + "." + new_counter;
+    } else if (minutes < 1) {
+      current_time = seconds + "." + new_counter;
       text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
     } else if (hours > 0) {
       current_time = hours + ":" + new_minutes + ":" + new_seconds + "." + new_counter; //output the current time with hours if there has been more than one hour
@@ -119,6 +122,16 @@ function draw() {
     times[localStorage.length - 1] = localStorage.getItem(localStorage.length - 1);
     showSolve1++;
     showSolve2++;
+    if (localStorage.getItem(localStorage.length - 1)[0] == 3) {
+      threeTimes[threeTimes.length] = localStorage.getItem(localStorage.length - 1);
+      //console.log("threeTimes added" + threeTimes[threeTimes.length - 1]);
+    } else if (localStorage.getItem(localStorage.length - 1)[0] == 2) {
+      twoTimes[twoTimes.length] = localStorage.getItem(localStorage.length - 1);
+      //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+    } else if (localStorage.getItem(localStorage.length - 1)[0] == 4) {
+      fourTimes[fourTimes.length] = localStorage.getItem(localStorage.length - 1);
+      //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+    }
     justSolved = false; //stop the if statement from being called again
   }
   fill(white);
@@ -183,6 +196,7 @@ function keyPressed() {
   if (key === 's') {
     usingStack = true;
     keyStopped = false;
+    stackmat.start();
   }
   if (key === 'c') {
     usingStack = false;
@@ -198,7 +212,7 @@ function touchStarted() { //same as keyPressed for mobile
     keyStopped = true; //if the timer is started then stop the timer
     oldScram = scram1;
     scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
-	  justSolved = true; //tell the draw loop to output the solve to the console
+    justSolved = true; //tell the draw loop to output the solve to the console
   } else {
     strtTmr = 0;
     txtClr = red;
@@ -264,14 +278,14 @@ function mouseClicked() {
   showSolve2 = op[1];
 }
 
-stackmat.on('packetReceived', function(packet) {
+stackmat.on('packetReceived', function (packet) {
   if (usingStack == true) {
     timerTime = packet.timeInMilliseconds;
     if (packet.timeInMilliseconds == prevPacket && timerStarted == true) {
       timerStarted = false;
       justSolved = true;
       oldScram = scram1;
-      scram1=sc2.genScram(scramLength, scramMoves);
+      scram1 = sc2.genScram(scramLength, scramMoves);
     }
     tcounter = Math.trunc((timerTime % 1000) / 10);
     tseconds = Math.trunc(timerTime / 1000);
@@ -280,14 +294,21 @@ stackmat.on('packetReceived', function(packet) {
     }
     tminutes = Math.trunc(timerTime / 60000);
     prevPacket = packet.timeInMilliseconds;
+    if (timerStarted == true && tcounter == 0) {
+      timerStarted = false;
+    }
   }
 })
 
-stackmat.on('started', function(packet) {
+stackmat.on('started', function (packet) {
   if (usingStack == true) {
     timerStarted = true;
     seconds = 0;
     counter = 0;
     minutes = 0;
   }
+})
+
+stackmat.on('reset', function (packet) {
+  console.log('reset');
 })
