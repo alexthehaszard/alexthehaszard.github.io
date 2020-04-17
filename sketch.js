@@ -80,8 +80,6 @@ function draw() {
   new_tseconds = String(tseconds).padStart(2, '0'); //make the seconds always have 2 digits
   new_tcounter = String(tcounter).padStart(2, '0'); //make the counters always have 2 digits
 
-
-
   if (usingStack == true) {
     if (timerStarted == false) {
       if (tminutes > 0) {
@@ -281,7 +279,10 @@ function mouseClicked() {
 stackmat.on('packetReceived', function (packet) {
   if (usingStack == true) {
     timerTime = packet.timeInMilliseconds;
-    if (packet.timeInMilliseconds == prevPacket && timerStarted == true) {
+    if (timerStarted == true && tcounter == 0 && prevPacket == 0 && timerTime == 0) {
+      timerStarted = false;
+    }
+    else if (packet.timeInMilliseconds == prevPacket && timerStarted == true) {
       timerStarted = false;
       justSolved = true;
       oldScram = scram1;
@@ -293,15 +294,14 @@ stackmat.on('packetReceived', function (packet) {
       tseconds = tseconds % 60;
     }
     tminutes = Math.trunc(timerTime / 60000);
+
     prevPacket = packet.timeInMilliseconds;
-    if (timerStarted == true && tcounter == 0) {
-      timerStarted = false;
-    }
   }
 })
 
 stackmat.on('started', function (packet) {
   if (usingStack == true) {
+    keyStopped = false;
     timerStarted = true;
     seconds = 0;
     counter = 0;
@@ -311,4 +311,5 @@ stackmat.on('started', function (packet) {
 
 stackmat.on('reset', function (packet) {
   console.log('reset');
+
 })
