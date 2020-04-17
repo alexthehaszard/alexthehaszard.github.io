@@ -79,17 +79,44 @@ function Stats() {
 
     this.previous = function (solve1, solve2) {
         let output = [];
-        if (mouseX > width / 10 && mouseY > height - height / 10) {
-            output[0] = solve1 - 1;
-            output[1] = solve2 - 1;
-        }
-        else if (mouseX < width - width / 10 && mouseY > height - height / 10) {
+        if (mouseX < width / 10 && mouseY > height - height / 10) {
             output[0] = solve1 + 1;
             output[1] = solve2 + 1;
+        }
+        else if (mouseX > width - width / 10 && mouseY > height - height / 10) {
+            output[0] = solve1 - 1;
+            output[1] = solve2 - 1;
         }
         else {
             output[0] = solve1;
             output[1] = solve2;
+        }
+        return output;
+    }
+
+    this.removeTime = function (ar, index, index2) {
+        let output = [index, index2];
+        if (mouseX > width / 10 && mouseX < width / 2 && mouseY > height - height / 10) {
+            if (confirm('delete solve?')) {
+                ar.splice(index, 1);
+                output[0] = index - 1;
+                output[1] = index2 - 1
+                localStorage.clear();
+                for (let i = 0; i < ar.length; i++) {
+                    localStorage.setItem(i, ar[i]);
+                }
+            }
+        }
+        if (mouseX < width - width / 10 && mouseX > width / 2 && mouseY > height - height / 10) {
+            if (confirm('delete solve?')) {
+                ar.splice(index2, 1);
+                output[0] = index - 1;
+                output[1] = index2 - 1
+                localStorage.clear();
+                for (let i = 0; i < ar.length; i++) {
+                    localStorage.setItem(i, ar[i]);
+                }
+            }
         }
         return output;
     }

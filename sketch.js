@@ -54,16 +54,18 @@ function setup() {
 
 
   for (let i = 0; i < localStorage.length; i++) {
-    times[i] = localStorage.getItem(i);
-    if (times[i][0] == 3) {
-      threeTimes[threeTimes.length] = times[i];
-      //console.log("threeTimes added" + threeTimes[threeTimes.length - 1]);
-    } else if (times[i][0] == 2) {
-      twoTimes[twoTimes.length] = times[i];
-      //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
-    } else if (localStorage.getItem(localStorage.length - 1)[0] == 4) {
-      fourTimes[fourTimes.length] = localStorage.getItem(localStorage.length - 1);
-      //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+    if (localStorage.getItem(i) != undefined) {
+      times[i] = localStorage.getItem(i);
+      if (times[i][0] == 3) {
+        threeTimes[threeTimes.length] = times[i];
+        //console.log("threeTimes added" + threeTimes[threeTimes.length - 1]);
+      } else if (times[i][0] == 2) {
+        twoTimes[twoTimes.length] = times[i];
+        //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+      } else if (localStorage.getItem(localStorage.length - 1)[0] == 4) {
+        fourTimes[fourTimes.length] = localStorage.getItem(localStorage.length - 1);
+        //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
+      }
     }
   }
 }
@@ -274,6 +276,9 @@ function mouseClicked() {
   let op = stats.previous(showSolve1, showSolve2);
   showSolve1 = op[0];
   showSolve2 = op[1];
+  let removed = stats.removeTime(times, showSolve1, showSolve2);
+  showSolve1 = removed[0];
+  showSolve2 = removed[1];
 }
 
 stackmat.on('packetReceived', function (packet) {
