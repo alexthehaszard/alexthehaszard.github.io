@@ -120,4 +120,25 @@ function Stats() {
         }
         return output;
     }
+
+    this.AOFive = function (ar, num) {
+        let outAr = [];
+        let average = 0;
+        if (ar.length >= 5) {
+            for (let i = 1; i <= num; i++) {
+                let currentTime = ar[ar.length - i].split('-');
+                console.log(currentTime[1]);
+                average += parseFloat(currentTime[1]);
+                outAr[i - 1] = parseFloat(currentTime[1]);
+            }
+            average -= Math.max(...outAr);
+            average -= Math.min(...outAr);
+            average /= num - 2;
+
+            average = Math.round(average * 100) / 100;
+            return average;
+        } else {
+            return null;
+        }
+    }
 }
