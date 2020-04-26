@@ -264,14 +264,14 @@ function touchEnded() {
   }
 }
 
-// function mousePressed() {
-//   //the mobile controls are automatically bound to mouse to these are to disable that functionality
-//   return;
-// }
+function mousePressed() {
+  //the mobile controls are automatically bound to mouse to these are to disable that functionality
+  return;
+}
 
-// function mouseReleased() {
-//   return;
-// }
+function mouseReleased() {
+  return;
+}
 
 function startTimer() {
   strtTmr++;
@@ -325,6 +325,8 @@ stackmat.on("started", function (packet) {
   if (usingStack == true) {
     keyStopped = false;
     timerStarted = true;
+    started = Math.trunc(millis());
+    milli = 0;
     seconds = 0;
     counter = 0;
     minutes = 0;
