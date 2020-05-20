@@ -1,0 +1,4 @@
+add color to the timer text
+move everything over to html text
+add the stats to html
+add stackmat support with the html text

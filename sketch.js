@@ -5,7 +5,6 @@ let seconds = 0; //the seconds
 let new_seconds; //seconds reformatted
 let minutes = 0; //the minutes
 let new_minutes = 0; //minutes reformatted
-let hours = 0; //hours
 let tcounter = 0; //counts the time
 let new_tcounter; //the counter reformatted to be displayed
 let tseconds = 0; //the seconds
@@ -27,7 +26,7 @@ let scramType = "3x3";
 let oldScram = "";
 let red = "#ff0000";
 let green = "#00ff00";
-let white = 255;
+let white = "#ffffff";
 let txtClr = white;
 let strtTmr = 0;
 let testing = false;
@@ -39,15 +38,17 @@ let showSolve1;
 let showSolve2;
 let started = 0;
 const stackmat = new Stackmat();
+let timerText = document.getElementById("timerText");
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  noCanvas();
   setInterval(startTimer, 100); //sets up the colors for the timer
 
   stats = new Stats();
 
-  sc2 = new Scramble();
-  scram1 = sc2.genScram(scramLength, scramMoves);
+  sc = new Scramble();
+  scram1 = sc.genScram(scramLength, scramMoves);
+  sc.show(scram1); //show the scramble text
 
   showSolve1 = localStorage.length - 1;
   showSolve2 = localStorage.length - 2;
@@ -95,31 +96,30 @@ function draw() {
     if (timerStarted == false) {
       if (tminutes > 0) {
         current_time = tminutes + ":" + new_tseconds + "." + new_tcounter; //output the current time with minutes if there has been more than one minute
-        text(current_time, width / 2, height / 2 + windowWidth / 30);
       } else if (tminutes < 1) {
         current_time = tseconds + "." + new_tcounter;
-        text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
       }
     } else {
-      if (minutes > 0 && hours == 0) {
+      if (minutes > 0) {
         current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
-        text(current_time, width / 2, height / 2 + windowWidth / 30);
       } else if (minutes < 1) {
         current_time = seconds + "." + new_counter;
-        text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
       }
     }
   } else {
     if (minutes > 0) {
       current_time = minutes + ":" + new_seconds + "." + new_counter; //output the current time with minutes if there has been more than one minute
-      text(current_time, width / 2, height / 2 + windowWidth / 30);
     } else if (minutes < 1) {
       current_time = seconds + "." + new_counter;
-      text(current_time, width / 2, height / 2 + windowWidth / 30); //output the current time without minutes if it has not been a minute yet
     }
   }
 
+  if (timerText.innerHTML != current_time) {
+    timerText.innerHTML = current_time;
+  }
+
   if (justSolved == true) {
+    sc.show(scram1); //show the scramble text
     localStorage.setItem(
       localStorage.length,
       scramType + "-" + current_time + "-" + oldScram
@@ -152,14 +152,12 @@ function draw() {
     justSolved = false; //stop the if statement from being called again
   }
   fill(white);
-  sc2.show(scram1); //show the scramble text
   stats.show();
   stats.showInfo();
   stats.showStats(times[showSolve1], times[showSolve2]);
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight); //change the canvas size automatically
+  if (txtClr != timerText.style.color) {
+    timerText.style.color = txtClr;
+  }
 }
 
 function keyPressed() {
@@ -169,7 +167,7 @@ function keyPressed() {
       if (timerStarted == true) {
         keyStopped = true; //if the timer is started then stop the timer
         oldScram = scram1;
-        scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
+        scram1 = sc.genScram(scramLength, scramMoves); //generate a new scramble
         justSolved = true; //tell the draw loop to output the solve to the console
       } else {
         strtTmr = 0;
@@ -183,19 +181,22 @@ function keyPressed() {
     scramLength = 8; //changes scramble type to 2x2
     scramMoves = 3;
     scramType = "2x2";
-    scram1 = sc2.genScram(scramLength, scramMoves);
+    scram1 = sc.genScram(scramLength, scramMoves);
+    sc.show(scram1);
   }
   if (key === "3") {
     scramLength = 20; //changes scramble type to 3x3
     scramMoves = 6;
     scramType = "3x3";
-    scram1 = sc2.genScram(scramLength, scramMoves);
+    scram1 = sc.genScram(scramLength, scramMoves);
+    sc.show(scram1);
   }
   if (key === "4") {
     scramLength = 38; //changes scramble type to 4x4
     scramMoves = 9;
     scramType = "4x4";
-    scram1 = sc2.genScram(scramLength, scramMoves);
+    scram1 = sc.genScram(scramLength, scramMoves);
+    sc.show(scram1);
   }
   if (key === "s") {
     usingStack = true;
@@ -204,10 +205,9 @@ function keyPressed() {
   }
   if (key === "c") {
     usingStack = false;
-    counter = 0;
+    milli = 0;
     seconds = 0;
     minutes = 0;
-    hours = 0;
   }
 }
 
@@ -216,7 +216,7 @@ function touchStarted() {
   if (timerStarted == true) {
     keyStopped = true; //if the timer is started then stop the timer
     oldScram = scram1;
-    scram1 = sc2.genScram(scramLength, scramMoves); //generate a new scramble
+    scram1 = sc.genScram(scramLength, scramMoves); //generate a new scramble
     justSolved = true; //tell the draw loop to output the solve to the console
   } else {
     strtTmr = 0;
@@ -278,6 +278,7 @@ function startTimer() {
   if (strtTmr == 5) {
     if (testing == true) {
       txtClr = green; //changes the color of the timer when it is ready
+      return;
     }
   }
 }
@@ -290,6 +291,10 @@ function mouseClicked() {
   showSolve1 = removed[0];
   showSolve2 = removed[1];
 }
+
+stackmat.on("timerConnected", function (packet) {
+  console.log("timer connected");
+});
 
 stackmat.on("packetReceived", function (packet) {
   if (usingStack == true) {
@@ -308,7 +313,7 @@ stackmat.on("packetReceived", function (packet) {
       timerStarted = false;
       justSolved = true;
       oldScram = scram1;
-      scram1 = sc2.genScram(scramLength, scramMoves);
+      scram1 = sc.genScram(scramLength, scramMoves);
     }
     tcounter = Math.trunc((timerTime % 1000) / 10);
     tseconds = Math.trunc(timerTime / 1000);
