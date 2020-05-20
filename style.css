@@ -13,10 +13,15 @@ canvas {
   color: white;
 }
 
+.buttons {
+  position: fixed;
+  bottom: 5vh;
+}
+
 #scrambleText {
   margin: auto;
-  margin-left: 10vw;
-  margin-right: 10vw;
+  margin-left: 8vw;
+  margin-right: 8vw;
   margin-top: 3vh;
   text-align: center;
   font-size: 3vw;
@@ -25,8 +30,24 @@ canvas {
 #timerText {
   position: fixed;
   left: 50%;
-  top: 18%;
+  top: 35%;
   transform: translateX(-50%);
   font-size: 20vh;
   text-align: center;
+}
+
+#left {
+  left: 5vw;
+}
+
+#right {
+  right: 5vw;
+}
+
+#leftStats {
+  position: fixed;
+  left: 10vw;
+  bottom: 2vh;
+  width: 30vw;
+  height: 10vh;
 }

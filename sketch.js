@@ -38,7 +38,10 @@ let showSolve1;
 let showSolve2;
 let started = 0;
 const stackmat = new Stackmat();
-let timerText = document.getElementById("timerText");
+const timerText = document.getElementById("timerText");
+const leftTime = document.getElementById("leftTime");
+const leftType = document.getElementById("leftType");
+const leftScramble = document.getElementById("leftScramble");
 
 function setup() {
   noCanvas();
@@ -157,6 +160,17 @@ function draw() {
   stats.showStats(times[showSolve1], times[showSolve2]);
   if (txtClr != timerText.style.color) {
     timerText.style.color = txtClr;
+  }
+
+  let splitSolveLeft = times[showSolve1].split("-");
+  if (
+    splitSolveLeft[1] != leftTime.innerHTML ||
+    splitSolveLeft[0] != leftType.innerHTML ||
+    splitSolveLeft[2] != leftScramble.innerHTML
+  ) {
+    leftTime.innerHTML = splitSolveLeft[1];
+    leftType.innerHTML = splitSolveLeft[0];
+    leftScramble.innerHTML = splitSolveLeft[2];
   }
 }
 
@@ -284,12 +298,15 @@ function startTimer() {
 }
 
 function mouseClicked() {
-  let op = stats.previous(showSolve1, showSolve2);
-  showSolve1 = op[0];
-  showSolve2 = op[1];
   let removed = stats.removeTime(times, showSolve1, showSolve2);
   showSolve1 = removed[0];
   showSolve2 = removed[1];
+}
+
+function moveStats(direction) {
+  let op = stats.previous(showSolve1, showSolve2, direction);
+  showSolve1 = op[0];
+  showSolve2 = op[1];
 }
 
 stackmat.on("timerConnected", function (packet) {
