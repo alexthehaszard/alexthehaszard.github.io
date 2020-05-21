@@ -129,11 +129,9 @@ function Stats() {
     if (direction == 0) {
       output[0] = solve1 + 1;
       output[1] = solve2 + 1;
-      console.log("move left");
     } else if (direction == 1) {
       output[0] = solve1 - 1;
       output[1] = solve2 - 1;
-      console.log("move right");
     } else {
       output[0] = solve1;
       output[1] = solve2;
