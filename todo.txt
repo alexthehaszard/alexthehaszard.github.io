@@ -1,8 +1,3 @@
-(done)  add color to the timer text
-(done)  move everything over to html text
-(done)  add the stats to html
-(done)  add stackmat support with the html text
-(done for pc) fix up the text positioning in the stats cards
-(done)  make the second stats card
-(done)  make it so that you do not get an error when you go above your most recent solve in stats
-(done for pc) just generally make everything look nicer
+make mobile functionality better
+add a button to switch between 2x2, 3x3 and 4x4
+add a button (preferably only on desktop) that enables/disables stackmat

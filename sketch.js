@@ -1,5 +1,5 @@
 let counter = 0; //counts the time
-let milli = 0;
+let milli = 0; //the milliseconds
 let new_counter; //the counter reformatted to be displayed
 let seconds = 0; //the seconds
 let new_seconds; //seconds reformatted
@@ -29,11 +29,10 @@ let green = "#00ff00";
 let white = "#ffffff";
 let txtClr = white;
 let strtTmr = 0;
-let testing = false;
+let timerNotAvailable = false; //used to check when timer cannot be started when key is being pressed
 let usingStack = false;
 let prevPacket;
 let timerTime;
-let stats;
 let showSolve1;
 let showSolve2;
 let started = 0;
@@ -45,16 +44,14 @@ const leftScramble = document.getElementById("leftScramble");
 const rightTime = document.getElementById("rightTime");
 const rightType = document.getElementById("rightType");
 const rightScramble = document.getElementById("rightScramble");
+const stats = new Stats();
+const sc = new Scramble();
 
 function setup() {
   noCanvas();
   setInterval(startTimer, 100); //sets up the colors for the timer
 
-  stats = new Stats();
-
-  sc = new Scramble();
   scram1 = sc.genScram(scramLength, scramMoves);
-  sc.show(scram1); //show the scramble text
 
   showSolve1 = localStorage.length - 1;
   showSolve2 = localStorage.length - 2;
@@ -64,15 +61,12 @@ function setup() {
       times[i] = localStorage.getItem(i);
       if (times[i][0] == 3) {
         threeTimes[threeTimes.length] = times[i];
-        //console.log("threeTimes added" + threeTimes[threeTimes.length - 1]);
       } else if (times[i][0] == 2) {
         twoTimes[twoTimes.length] = times[i];
-        //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
       } else if (localStorage.getItem(localStorage.length - 1)[0] == 4) {
         fourTimes[fourTimes.length] = localStorage.getItem(
           localStorage.length - 1
         );
-        //console.log("twoTimes added" + twoTimes[twoTimes.length - 1]);
       }
     }
   }
@@ -87,11 +81,6 @@ function draw() {
   } else {
     counter = 0;
   }
-  background(50);
-  textFont("Arial");
-  textSize(windowWidth / 8);
-  textAlign("center");
-  fill(txtClr);
   new_seconds = String(seconds).padStart(2, "0"); //make the seconds always have 2 digits
   new_counter = String(milli).padStart(2, "0"); //make the counters always have 2 digits
   new_minutes = String(minutes).padStart(2, "0"); //make the minutes always have 2 digits
@@ -125,7 +114,6 @@ function draw() {
   }
 
   if (justSolved == true) {
-    sc.show(scram1); //show the scramble text
     localStorage.setItem(
       localStorage.length,
       scramType + "-" + current_time + "-" + oldScram
@@ -157,10 +145,6 @@ function draw() {
     }
     justSolved = false; //stop the if statement from being called again
   }
-  fill(white);
-  stats.show();
-  stats.showInfo();
-  stats.showStats(times[showSolve1], times[showSolve2]);
   if (txtClr != timerText.style.color) {
     timerText.style.color = txtClr;
   }
@@ -199,7 +183,7 @@ function keyPressed() {
       } else {
         strtTmr = 0;
         txtClr = red;
-        testing = true;
+        timerNotAvailable = true;
         startTimer();
       }
     }
@@ -209,21 +193,18 @@ function keyPressed() {
     scramMoves = 3;
     scramType = "2x2";
     scram1 = sc.genScram(scramLength, scramMoves);
-    sc.show(scram1);
   }
   if (key === "3") {
     scramLength = 20; //changes scramble type to 3x3
     scramMoves = 6;
     scramType = "3x3";
     scram1 = sc.genScram(scramLength, scramMoves);
-    sc.show(scram1);
   }
   if (key === "4") {
     scramLength = 38; //changes scramble type to 4x4
     scramMoves = 9;
     scramType = "4x4";
     scram1 = sc.genScram(scramLength, scramMoves);
-    sc.show(scram1);
   }
   if (key === "s") {
     usingStack = true;
@@ -238,8 +219,8 @@ function keyPressed() {
   }
 }
 
+//same as keyPressed for mobile
 function touchStarted() {
-  //same as keyPressed for mobile
   if (timerStarted == true) {
     keyStopped = true; //if the timer is started then stop the timer
     oldScram = scram1;
@@ -248,14 +229,14 @@ function touchStarted() {
   } else {
     strtTmr = 0;
     txtClr = red;
-    testing = true;
+    timerNotAvailable = true;
     startTimer();
   }
 }
 
+//when the key is released, start the timer
 function keyReleased() {
   if (key === " ") {
-    //if the key is spacebar
     if (timerStarted == false && txtClr == green) {
       txtClr = white;
       timerStarted = true; //if the timer is not started start the timer
@@ -267,14 +248,14 @@ function keyReleased() {
     } else if (timerStarted == true && txtClr == white) {
       timerStarted = false; //stop the timer
     } else if (txtClr == red) {
-      testing = false;
+      timerNotAvailable = false;
       txtClr = white;
     }
   }
 }
 
+//this is keyReleased but on mobile
 function touchEnded() {
-  //same as keyReleased for mobile
   if (timerStarted == false && txtClr == green) {
     txtClr = white;
     timerStarted = true; //if the timer is not started start the timer
@@ -286,13 +267,13 @@ function touchEnded() {
   } else if (timerStarted == true && txtClr == white) {
     timerStarted = false; //stop the timer
   } else if (txtClr == red) {
-    testing = false;
+    timerNotAvailable = false;
     txtClr = white;
   }
 }
 
+//mousePressed and mouseReleased can be used to stop the touchStarted and touchReleased functions from working with the mouse
 function mousePressed() {
-  //the mobile controls are automatically bound to mouse to these are to disable that functionality
   return;
 }
 
@@ -300,16 +281,18 @@ function mouseReleased() {
   return;
 }
 
+//when used in keyboard mode, this is to show the colors when the timer is started
 function startTimer() {
   strtTmr++;
   if (strtTmr == 5) {
-    if (testing == true) {
-      txtClr = green; //changes the color of the timer when it is ready
+    if (timerNotAvailable == true) {
+      txtClr = green;
       return;
     }
   }
 }
 
+//move the stats in a direction, used in the HTML
 function moveStats(direction) {
   if (showSolve1 + 1 == times.length && direction == 0) {
   } else {
@@ -319,16 +302,14 @@ function moveStats(direction) {
   }
 }
 
+//remove a time, used in the HTML
 function removeStats(direction) {
   let op = stats.removeTime(times, showSolve1, showSolve2, direction);
   showSolve1 = op[0];
   showSolve2 = op[1];
 }
 
-stackmat.on("timerConnected", function (packet) {
-  console.log("timer connected");
-});
-
+//check the time every time a packet is recieved
 stackmat.on("packetReceived", function (packet) {
   if (usingStack == true) {
     timerTime = packet.timeInMilliseconds;
@@ -354,11 +335,11 @@ stackmat.on("packetReceived", function (packet) {
       tseconds = tseconds % 60;
     }
     tminutes = Math.trunc(timerTime / 60000);
-
     prevPacket = packet.timeInMilliseconds;
   }
 });
 
+//start the timer using stackmat
 stackmat.on("started", function (packet) {
   if (usingStack == true) {
     keyStopped = false;
@@ -369,8 +350,4 @@ stackmat.on("started", function (packet) {
     counter = 0;
     minutes = 0;
   }
-});
-
-stackmat.on("reset", function (packet) {
-  console.log("reset");
 });
