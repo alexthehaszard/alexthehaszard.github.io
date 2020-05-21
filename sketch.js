@@ -44,6 +44,7 @@ const leftScramble = document.getElementById("leftScramble");
 const rightTime = document.getElementById("rightTime");
 const rightType = document.getElementById("rightType");
 const rightScramble = document.getElementById("rightScramble");
+const scrambleText = document.getElementById("scrambleText");
 const stats = new Stats();
 const sc = new Scramble();
 
@@ -168,6 +169,9 @@ function draw() {
     rightTime.innerHTML = splitSolveRight[1];
     rightType.innerHTML = splitSolveRight[0];
     rightScramble.innerHTML = splitSolveRight[2];
+  }
+  if (scrambleText.innerHTML != scram1) {
+    scrambleText.innerHTML = scram1;
   }
 }
 

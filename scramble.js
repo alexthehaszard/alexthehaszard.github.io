@@ -1,8 +1,4 @@
 function Scramble() {
-  this.show = function (txt) {
-    document.getElementById("scrambleText").innerHTML = txt;
-  };
-
   this.genScram = function (scLength, moveNum) {
     let scram = [0];
     let moves = ["R", "U", "F", "L", "D", "B", "r", "u", "f"];
