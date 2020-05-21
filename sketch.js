@@ -310,16 +310,13 @@ function startTimer() {
   }
 }
 
-function mouseClicked() {
-  let removed = stats.removeTime(times, showSolve1, showSolve2);
-  showSolve1 = removed[0];
-  showSolve2 = removed[1];
-}
-
 function moveStats(direction) {
-  let op = stats.previous(showSolve1, showSolve2, direction);
-  showSolve1 = op[0];
-  showSolve2 = op[1];
+  if (showSolve1 + 1 == times.length && direction == 0) {
+  } else {
+    let op = stats.previous(showSolve1, showSolve2, direction);
+    showSolve1 = op[0];
+    showSolve2 = op[1];
+  }
 }
 
 function removeStats(direction) {

@@ -1,8 +1,8 @@
-(done)add color to the timer text
-move everything over to html text
-add the stats to html
-(done)add stackmat support with the html text
-fix up the text positioning in the stats cards
-make the second stats card
-make it so that you do not get an error when you go above your most recent solve in stats
-just generally make everything look nicer
+(done)  add color to the timer text
+(done)  move everything over to html text
+(done)  add the stats to html
+(done)  add stackmat support with the html text
+(done for pc) fix up the text positioning in the stats cards
+(done)  make the second stats card
+(done)  make it so that you do not get an error when you go above your most recent solve in stats
+(done for pc) just generally make everything look nicer
