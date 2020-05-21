@@ -150,26 +150,32 @@ function draw() {
     timerText.style.color = txtClr;
   }
 
-  let splitSolveLeft = times[showSolve1].split("-");
-  if (
-    splitSolveLeft[1] != leftTime.innerHTML ||
-    splitSolveLeft[0] != leftType.innerHTML ||
-    splitSolveLeft[2] != leftScramble.innerHTML
-  ) {
-    leftTime.innerHTML = splitSolveLeft[1];
-    leftType.innerHTML = splitSolveLeft[0];
-    leftScramble.innerHTML = splitSolveLeft[2];
+  if (times.length > 0) {
+    let splitSolveLeft = times[showSolve1].split("-");
+    if (
+      splitSolveLeft[1] != leftTime.innerHTML ||
+      splitSolveLeft[0] != leftType.innerHTML ||
+      splitSolveLeft[2] != leftScramble.innerHTML
+    ) {
+      leftTime.innerHTML = splitSolveLeft[1];
+      leftType.innerHTML = splitSolveLeft[0];
+      leftScramble.innerHTML = splitSolveLeft[2];
+    }
   }
-  let splitSolveRight = times[showSolve2].split("-");
-  if (
-    splitSolveRight[1] != rightTime.innerHTML ||
-    splitSolveRight[0] != rightType.innerHTML ||
-    splitSolveRight[2] != rightScramble.innerHTML
-  ) {
-    rightTime.innerHTML = splitSolveRight[1];
-    rightType.innerHTML = splitSolveRight[0];
-    rightScramble.innerHTML = splitSolveRight[2];
+  if (times.length > 1) {
+    let splitSolveRight = times[showSolve2].split("-");
+    if (
+      splitSolveRight[1] != rightTime.innerHTML ||
+      splitSolveRight[0] != rightType.innerHTML ||
+      splitSolveRight[2] != rightScramble.innerHTML
+    ) {
+      rightTime.innerHTML = splitSolveRight[1];
+      rightType.innerHTML = splitSolveRight[0];
+      rightScramble.innerHTML = splitSolveRight[2];
+    }
   }
+
+  //when a new scramble is generated, show it.
   if (scrambleText.innerHTML != scram1) {
     scrambleText.innerHTML = scram1;
   }
@@ -298,7 +304,10 @@ function startTimer() {
 
 //move the stats in a direction, used in the HTML
 function moveStats(direction) {
-  if (showSolve1 + 1 == times.length && direction == 0) {
+  if (
+    (showSolve1 + 1 == times.length && direction == 0) ||
+    (showSolve2 == 0 && direction == 1)
+  ) {
   } else {
     let op = stats.previous(showSolve1, showSolve2, direction);
     showSolve1 = op[0];
