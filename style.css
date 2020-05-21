@@ -16,6 +16,7 @@ canvas {
 .buttons {
   position: fixed;
   bottom: 5vh;
+  min-width: 5vw;
 }
 
 #scrambleText {
@@ -37,17 +38,83 @@ canvas {
 }
 
 #left {
-  left: 5vw;
+  left: 2.5vw;
 }
 
 #right {
-  right: 5vw;
+  right: 2.5vw;
 }
 
 #leftStats {
   position: fixed;
   left: 10vw;
   bottom: 2vh;
-  width: 30vw;
+  width: 38vw;
   height: 10vh;
+}
+
+#leftStats:hover {
+  cursor: pointer;
+}
+
+#rightStats {
+  position: fixed;
+  right: 10vw;
+  bottom: 2vh;
+  width: 38vw;
+  height: 10vh;
+}
+
+#rightStats:hover {
+  cursor: pointer;
+}
+
+#leftType {
+  position: relative;
+  left: 4%;
+  top: 5%;
+  font-size: 2vh;
+}
+
+#leftTime {
+  position: relative;
+  left: 4%;
+  bottom: -55%;
+  font-size: 5vh;
+  transform: translateY(-100%);
+}
+
+#leftScramble {
+  position: absolute;
+  right: 7%;
+  width: 27vw;
+  top: 50%;
+  font-size: 2vh;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+#rightType {
+  position: relative;
+  left: 4%;
+  top: 5%;
+  font-size: 2vh;
+}
+
+#rightTime {
+  position: relative;
+  left: 4%;
+  bottom: -55%;
+  font-size: 5vh;
+  transform: translateY(-100%);
+}
+
+#rightScramble {
+  position: absolute;
+  right: 7%;
+  width: 27vw;
+  top: 50%;
+  font-size: 2vh;
+  text-align: center;
+  transform: translateY(-50%);
 }

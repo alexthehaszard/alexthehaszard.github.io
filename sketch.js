@@ -42,6 +42,9 @@ const timerText = document.getElementById("timerText");
 const leftTime = document.getElementById("leftTime");
 const leftType = document.getElementById("leftType");
 const leftScramble = document.getElementById("leftScramble");
+const rightTime = document.getElementById("rightTime");
+const rightType = document.getElementById("rightType");
+const rightScramble = document.getElementById("rightScramble");
 
 function setup() {
   noCanvas();
@@ -171,6 +174,16 @@ function draw() {
     leftTime.innerHTML = splitSolveLeft[1];
     leftType.innerHTML = splitSolveLeft[0];
     leftScramble.innerHTML = splitSolveLeft[2];
+  }
+  let splitSolveRight = times[showSolve2].split("-");
+  if (
+    splitSolveRight[1] != rightTime.innerHTML ||
+    splitSolveRight[0] != rightType.innerHTML ||
+    splitSolveRight[2] != rightScramble.innerHTML
+  ) {
+    rightTime.innerHTML = splitSolveRight[1];
+    rightType.innerHTML = splitSolveRight[0];
+    rightScramble.innerHTML = splitSolveRight[2];
   }
 }
 
@@ -305,6 +318,12 @@ function mouseClicked() {
 
 function moveStats(direction) {
   let op = stats.previous(showSolve1, showSolve2, direction);
+  showSolve1 = op[0];
+  showSolve2 = op[1];
+}
+
+function removeStats(direction) {
+  let op = stats.removeTime(times, showSolve1, showSolve2, direction);
   showSolve1 = op[0];
   showSolve2 = op[1];
 }

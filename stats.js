@@ -141,9 +141,9 @@ function Stats() {
     return output;
   };
 
-  this.removeTime = function (ar, index, index2) {
+  this.removeTime = function (ar, index, index2, direction) {
     let output = [index, index2];
-    if (0 == 1) {
+    if (direction == 1) {
       if (confirm("delete solve?")) {
         ar.splice(index, 1);
         output[0] = index - 1;
@@ -154,7 +154,7 @@ function Stats() {
         }
       }
     }
-    if (0 == 1) {
+    if (direction == 0) {
       if (confirm("delete solve?")) {
         ar.splice(index2, 1);
         output[0] = index - 1;
