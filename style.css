@@ -27,6 +27,8 @@ canvas {
   text-align: center;
   font-size: 3vw;
   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
 #timerText {
@@ -37,6 +39,8 @@ canvas {
   font-size: 20vh;
   text-align: center;
   user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 
 #left {
