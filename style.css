@@ -26,6 +26,7 @@ canvas {
   margin-top: 3vh;
   text-align: center;
   font-size: 3vw;
+  user-select: none;
 }
 
 #timerText {
@@ -35,6 +36,7 @@ canvas {
   transform: translateX(-50%);
   font-size: 20vh;
   text-align: center;
+  user-select: none;
 }
 
 #left {
@@ -79,9 +81,8 @@ canvas {
 #leftTime {
   position: relative;
   left: 4%;
-  bottom: -55%;
+  bottom: 2.5vh;
   font-size: 5vh;
-  transform: translateY(-100%);
 }
 
 #leftScramble {
@@ -104,9 +105,8 @@ canvas {
 #rightTime {
   position: relative;
   left: 4%;
-  bottom: -55%;
+  bottom: 2.5vh;
   font-size: 5vh;
-  transform: translateY(-100%);
 }
 
 #rightScramble {
