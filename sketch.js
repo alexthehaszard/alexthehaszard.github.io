@@ -33,7 +33,6 @@ let testing = false;
 let usingStack = false;
 let prevPacket;
 let timerTime;
-let stats;
 let showSolve1;
 let showSolve2;
 let started = 0;
@@ -54,11 +53,7 @@ function setup() {
   noCanvas();
   setInterval(startTimer, 100); //sets up the colors for the timer
 
-  stats = new Stats();
-
-  sc = new Scramble();
   scram1 = sc.genScram(scramLength, scramMoves);
-  sc.show(scram1); //show the scramble text
 
   showSolve1 = localStorage.length - 1;
   showSolve2 = localStorage.length - 2;
@@ -312,6 +307,10 @@ function startTimer() {
       return;
     }
   }
+}
+
+function openStats() {
+  statsCard.style.display = "block";
 }
 
 function moveStats(direction) {
