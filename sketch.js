@@ -45,6 +45,10 @@ const leftScramble = document.getElementById("leftScramble");
 const rightTime = document.getElementById("rightTime");
 const rightType = document.getElementById("rightType");
 const rightScramble = document.getElementById("rightScramble");
+const scrambleText = document.getElementById("scrambleText");
+const statsCard = document.getElementById("statsCard");
+const stats = new Stats();
+const sc = new Scramble();
 
 function setup() {
   noCanvas();

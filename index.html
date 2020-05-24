@@ -3,7 +3,6 @@
   <head>
     <title>Cube Timer</title>
     <script src="p5.js"></script>
-    <!-- <script src="p5.sound.js"></script> -->
     <script type="text/javascript" src="https://unpkg.com/stackmat"></script>
     <link
       rel="stylesheet"
@@ -22,6 +21,11 @@
     <div id="timer">
       <p id="timerText" class="textStyle"></p>
     </div>
+    <div id="statsCard" class="card text-white bg-secondary border-dark mb-3">
+      <button id="delete" class="buttons btn btn-outline-dark text-white">
+        delete solve
+      </button>
+    </div>
     <div id="stats">
       <button
         id="left"
@@ -33,7 +37,7 @@
       <div
         class="card text-white bg-secondary"
         id="leftStats"
-        onClick="removeStats(1)"
+        onClick="openStats(1)"
       >
         <p id="leftType"></p>
         <p id="leftTime"></p>
