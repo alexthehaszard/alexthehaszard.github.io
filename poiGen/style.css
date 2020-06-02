@@ -3,7 +3,11 @@ html, body {
   padding: 0;
   font-size: 3rem;
   background-image: linear-gradient(#C165DD, #5C27FE);
-  min-height: 100vh;
+  min-height: -webkit-fill-available;
+}
+
+html {
+  height: -webkit-fill-available;
 }
 
 .card-gradient {
