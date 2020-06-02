@@ -54,6 +54,7 @@ function setup() {
   setInterval(startTimer, 100); //sets up the colors for the timer
 
   scram1 = sc.genScram(scramLength, scramMoves);
+  sc.show(scram1);
 
   showSolve1 = localStorage.length - 1;
   showSolve2 = localStorage.length - 2;
