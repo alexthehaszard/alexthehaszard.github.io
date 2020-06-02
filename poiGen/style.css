@@ -4,6 +4,7 @@ html, body {
   font-size: 3rem;
   background-image: linear-gradient(#C165DD, #5C27FE);
   min-height: -webkit-fill-available;
+  overflow: hidden;
 }
 
 html {
@@ -14,6 +15,7 @@ html {
   position: absolute;
   display: flex;
   flex-direction: column;
+  width: max-content;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
