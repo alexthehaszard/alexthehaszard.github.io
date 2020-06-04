@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <head>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
+  <link rel="stylesheet" href="index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <a href="./cubeTimer/index.html">go to cube timer</a>
+  <nav id="navBar">
+    <h1 id="headerText">Alex Haszard</h1>
+  </nav>
+
+  <div id="projects">
+    <div id="poiGenerator" class="card card-body project-card">
+      <p id="poi" class="">Fornite POI Generator</p>
+      <img id="poigenphoto" src="poigenphoto.png">
+      <form action="poiGen/">
+        <button class="btn btn-primary card-button" href="./poiGen">Go to page</button>
+      </form>
+    </div>
+  </div>
+
+  <a href="./cubeTimer">go to cube timer</a>
   <br>
-  <a href="./poiGen/index.html">go to poi generator</a>
+  <a href="./poiGen">go to poi generator</a>
+  <br>
+  <a href="./ticTacToe">go to tic tac toe</a>
 </body>

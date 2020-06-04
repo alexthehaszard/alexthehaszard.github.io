@@ -1,0 +1,11 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(#803E95, #009DA1);
+}
+
+canvas {
+    border-radius: 5%;
+    box-shadow: rgba(0, 0, 0, 0.75) 0px 0px 30px 0px;
+}
