@@ -1,28 +1,55 @@
 <!DOCTYPE html>
-<head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> 
-  <link rel="stylesheet" href="index.css">
-  <link href="https://fonts.googleapis.com/css2?family=Muli&display=swap" rel="stylesheet">
-</head>
-
-<body>
-  <nav id="navBar">
-    <h1 id="headerText">Alex Haszard</h1>
-  </nav>
-
-  <div id="projects">
-    <div id="poiGenerator" class="card card-body project-card">
-      <p id="poi" class="">Fornite POI Generator</p>
-      <img id="poigenphoto" src="poigenphoto.png">
-      <form action="poiGen/">
-        <button class="btn btn-primary card-button" href="./poiGen">Go to page</button>
-      </form>
+<html lang="en">
+  <head>
+    <script src="p5.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <title>alexthehaszard</title>
+  </head>
+  <body>
+    <script src="sketch.js"></script>
+    <nav class="navbar">
+      <p class="secondary-nav">about me</p>
+      <p id="outputText">a</p>
+      <p class="secondary-nav">my projects</p>
+    </nav>
+  
+    <div id="content">
+      <div id="aboutMe">
+        <p class="content-header">about me</p>
+        <p class="content-text">hi, i'm alex and i like making coding projects for fun, here are some of them:</p>
+      </div>
+      <div id="projects">
+        <div class="project-card">
+          <p class="project-title">rubik's cube timer</p>
+          <img class="project-image" src="images/cubetimer600x300.png"></img>
+          <div class="project-buttons">
+            <a href="cubeTimer/" class="buttons"><p>open project</p></a>
+            <a href="https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/cubeTimer" class="buttons"><p>view code</p></a>
+          </div>
+        </div>
+        <div class="project-card">
+          <p class="project-title">fortnite poi generator</p>
+          <img class="project-image" src="images/tictactoe600x300.png"></img>
+          <div class="project-buttons">
+            <a href="poiGen/" class="buttons"><p>open project</p></a>
+            <a href="https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/poiGen" class="buttons"><p>view code</p></a>
+          </div>
+        </div>
+        <div class="project-card">
+          <p class="project-title">tic tac toe</p>
+          <img class="project-image" src="images/poigen600x300.png"></img>
+          <div class="project-buttons">
+            <a href="ticTacToe/" class="buttons"><p>open project</p></a>
+            <a href="https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/ticTacToe" class="buttons"><p>view code</p></a>
+          </div>
+        </div>
+      </div>
+      <button class="content-button buttons"><p>view all projects</p></button>
     </div>
-  </div>
 
-  <a href="./cubeTimer">go to cube timer</a>
-  <br>
-  <a href="./poiGen">go to poi generator</a>
-  <br>
-  <a href="./ticTacToe">go to tic tac toe</a>
-</body>
+    <div id="footer">
+      <p id="footerText">alex haszard 2020</p>
+    </div>
+  </body>
+</html>
