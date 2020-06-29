@@ -36,6 +36,10 @@ nav p:hover {
   cursor: pointer;
 }
 
+nav a {
+  cursor: default;
+}
+
 buttons:focus {
   outline: none;
 }
