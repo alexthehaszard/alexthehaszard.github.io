@@ -1,15 +1,8 @@
-const textToShow = "lexthehaszard";
+const textToShow = "lex.haszard";
 let textShowing = "a";
 let index = 0;
-
-function setup() {
-  noCanvas();
-  frameRate(10);
-}
-
-function draw() {
-  updateText();
-}
+setInterval(updateText, 100);
+updateText();
 
 function updateText() {
   if (textToShow[index] === undefined) {
