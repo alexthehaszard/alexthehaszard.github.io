@@ -26,7 +26,7 @@ p {
 a {
   color: white;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: min(3vw, 0.8rem);
 }
 
 nav p:hover {
@@ -59,17 +59,16 @@ nav a {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   height: max-content;
+  align-items: center;
+  justify-items: center;
   background-color: rgba(0, 0, 0, 0.2);
 }
 
 .secondary-nav {
-  top: 45%;
-  font-size: 1rem;
+  font-size: min(3vw, 1rem);
   margin: 0;
   height: max-content;
   width: max-content;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .content-header {
@@ -93,7 +92,7 @@ nav a {
 .project-card {
   background: rgba(0, 0, 0, 0.5);
   width: 90%;
-  margin: 5%;
+  margin: 1%;
   padding: 10px;
   border-radius: 12px;
 }
@@ -130,7 +129,7 @@ nav a {
 }
 
 #outputText {
-  font-size: 3rem;
+  font-size: min(4vw, 3rem);
 }
 
 #content {
@@ -148,7 +147,8 @@ nav a {
 
 #projects {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(30vh, 1fr));
+  justify-content: center;
 }
 
 #projects #footer {

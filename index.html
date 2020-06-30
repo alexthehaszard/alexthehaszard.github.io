@@ -5,15 +5,17 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
     <title>alexthehaszard</title>
+    <meta name="viewport" content="initial-scale=1">
+    <meta name="description" content="alex haszard's website!">
   </head>
   <body>
     <nav class="navbar">
-      <a href="aboutMe/"><p class="secondary-nav">about me</p></a>
-      <a href="./"><p id="outputText">_</p></a>
-      <a href="projects/"><p class="secondary-nav">my projects</p></a>
+      <a href="aboutMe/" id="aboutMeLink"><p class="secondary-nav">about me</p></a>
+      <a href="./" id="homeLink"><p id="outputText">_</p></a>
+      <a href="projects/" id="projectsLink"><p class="secondary-nav">my projects</p></a>
     </nav>
   
-    <div id="content">
+    <main id="content">
       <div id="aboutMe">
         <p class="content-header">about me</p>
         <p class="content-text">hi, i'm alex and i like making coding projects for fun, here are some of them:</p>
@@ -22,7 +24,7 @@
         <div class="project-card">
           <p class="project-title">rubik's cube timer</p>
           <a href="cubeTimer/">
-            <img class="project-image" src="images/cubetimer600x300.png"></img>
+            <img class="project-image" src="images/cubetimer600x300.png" alt="image loading"></img>
           </a>
           <div class="project-buttons">
             <a href="cubeTimer/" class="buttons"><p>open project</p></a>
@@ -32,7 +34,7 @@
         <div class="project-card">
           <p class="project-title">fortnite poi generator</p>
           <a href="poiGen/">
-            <img class="project-image" src="images/tictactoe600x300.png"></img>
+            <img class="project-image" src="images/tictactoe600x300.png" alt="image loading"></img>
           </a>
           <div class="project-buttons">
             <a href="poiGen/" class="buttons"><p>open project</p></a>
@@ -42,7 +44,7 @@
         <div class="project-card">
           <p class="project-title">tic tac toe</p>
           <a href="ticTacToe/">
-            <img class="project-image" src="images/poigen600x300.png"></img>
+            <img class="project-image" src="images/poigen600x300.png" alt="image loading"></img>
           </a>
           <div class="project-buttons">
             <a href="ticTacToe/" class="buttons"><p>open project</p></a>
@@ -53,7 +55,7 @@
       <div class="project-buttons">
         <a href="projects/" class="content-button buttons"><p>view all projects</p></a>
       </div>
-    </div>
+    </main>
 
     <div id="footer">
       <p id="footerText">alex haszard 2020</p>
