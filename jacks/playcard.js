@@ -36,7 +36,7 @@ class PlayCard {
       if (currentCard.num + this.num === 11) {
         this.element.style = "background-color: lightgreen";
         currentCard.element.style = "background-color: lightgreen";
-        setTimeout(() => {
+        if (usingBot === true) {
           this.element.style = "";
           if (currentCard) {
             currentCard.element.style = "";
@@ -46,7 +46,19 @@ class PlayCard {
             currentCard.updateElement(1);
             currentCard = null;
           }
-        }, 50);
+        } else {
+          setTimeout(() => {
+            this.element.style = "";
+            if (currentCard) {
+              currentCard.element.style = "";
+            }
+            this.updateElement();
+            if (currentCard) {
+              currentCard.updateElement(1);
+              currentCard = null;
+            }
+          }, 200);
+        }
       } else if (currentCard.num > 10 && this.num > 10 && !currentCard2) {
         currentCard2 = playCards[this.index];
         currentCard2.element.style = "background-color: lightblue";
@@ -57,7 +69,7 @@ class PlayCard {
         this.element.style = "background-color: lightgreen";
         currentCard.element.style = "background-color: lightgreen";
         currentCard2.element.style = "background-color: lightgreen";
-        setTimeout(() => {
+        if (usingBot === true) {
           this.element.style = "";
           if (currentCard) {
             currentCard.element.style = "";
@@ -74,7 +86,26 @@ class PlayCard {
           }
           currentCard = null;
           currentCard2 = null;
-        }, 50);
+        } else {
+          setTimeout(() => {
+            this.element.style = "";
+            if (currentCard) {
+              currentCard.element.style = "";
+            }
+            if (currentCard2) {
+              currentCard2.element.style = "";
+            }
+            this.updateElement();
+            if (currentCard) {
+              currentCard.updateElement();
+            }
+            if (currentCard2) {
+              currentCard2.updateElement(1);
+            }
+            currentCard = null;
+            currentCard2 = null;
+          }, 200);
+        }
       } else {
         this.element.style = "background-color: lightcoral";
         currentCard.element.style = "background-color: lightcoral";
@@ -91,7 +122,7 @@ class PlayCard {
           }
           currentCard = null;
           currentCard2 = null;
-        }, 1000);
+        }, 200);
       }
     }
   }
