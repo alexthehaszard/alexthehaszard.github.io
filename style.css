@@ -29,11 +29,8 @@ a {
   font-size: 0.8rem;
 }
 
-nav p {
-  transition: color 0.3s ease;
-}
-
 nav p:hover {
+  transition: color 0.5s ease;
   color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
 }

@@ -1,18 +1,19 @@
 const textToShow = "alex.haszard";
 let textShowing = "";
 let index = 0;
-setInterval(updateText, 200);
-updateText();
+setTimeout(function() {
+  setInterval(updateText, 150);
+}, 500);
 
 function updateText() {
   if (textToShow[index] === undefined) {
     index++;
     if (
       document.getElementById("outputText").innerHTML === textShowing + "_" &&
-      index % 10 === 5
+      index % 16 === 8
     ) {
       document.getElementById("outputText").innerHTML = textShowing;
-    } else if (index % 10 === 0) {
+    } else if (index % 16 === 0) {
       document.getElementById("outputText").innerHTML = textShowing + "_";
     }
     return;
