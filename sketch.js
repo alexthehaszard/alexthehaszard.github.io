@@ -1,15 +1,18 @@
-const textToShow = "lex.haszard";
-let textShowing = "a";
+const textToShow = "alex.haszard";
+let textShowing = "";
 let index = 0;
-setInterval(updateText, 100);
+setInterval(updateText, 200);
 updateText();
 
 function updateText() {
   if (textToShow[index] === undefined) {
     index++;
-    if (document.getElementById("outputText").innerHTML === textShowing + "_" && index % 20 === 10) {
+    if (
+      document.getElementById("outputText").innerHTML === textShowing + "_" &&
+      index % 10 === 5
+    ) {
       document.getElementById("outputText").innerHTML = textShowing;
-    } else if (index % 20 === 0) {
+    } else if (index % 10 === 0) {
       document.getElementById("outputText").innerHTML = textShowing + "_";
     }
     return;
