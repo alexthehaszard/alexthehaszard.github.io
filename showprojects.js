@@ -33,6 +33,12 @@ projects = [
     link: "jacks/",
     github: "https://github.com/alexthehaszard/jacks",
   },
+  {
+    name: "connect 4 arena",
+    photo: "images/c4-600x300.png",
+    link: "https://c4.bigstoneaudio.com",
+    github: "https://github.com/alexthehaszard/connect-4-arena",
+  },
 ];
 
 function showProject(number, dot) {
