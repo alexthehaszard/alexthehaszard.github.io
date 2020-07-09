@@ -42,7 +42,7 @@ projects = [
     name: "connect 4 arena",
     photo: "images/c4-600x300.png",
     outsideLink: true,
-    link: "https://c4.bigstoneaudio.com",
+    link: "http://c4.bigstoneaudio.com",
     github: "https://github.com/alexthehaszard/connect-4-arena",
   },
 ];
