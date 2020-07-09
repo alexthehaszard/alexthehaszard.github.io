@@ -2,6 +2,7 @@ projects = [
   {
     name: "rubik's cube timer",
     photo: "images/cubetimer600x300.png",
+    outsideLink: false,
     link: "cubeTimer/",
     github:
       "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/cubeTimer",
@@ -9,6 +10,7 @@ projects = [
   {
     name: "fortnite poi generator",
     photo: "images/poigen600x300.png",
+    outsideLink: false,
     link: "poiGen/",
     github:
       "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/poiGen",
@@ -16,6 +18,7 @@ projects = [
   {
     name: "tictactoe",
     photo: "images/tictactoe600x300.png",
+    outsideLink: false,
     link: "tictactoe/",
     github:
       "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/ticTacToe",
@@ -23,6 +26,7 @@ projects = [
   {
     name: "pathfinding visualizer",
     photo: "images/pathfinding600x300.png",
+    outsideLink: false,
     link: "pathfindingVisualizer/",
     github:
       "https://github.com/alexthehaszard/pathfindingAlgorithm/tree/master",
@@ -30,12 +34,14 @@ projects = [
   {
     name: "jacks (card game)",
     photo: "images/jacks600x300.png",
+    outsideLink: false,
     link: "jacks/",
     github: "https://github.com/alexthehaszard/jacks",
   },
   {
     name: "connect 4 arena",
     photo: "images/c4-600x300.png",
+    outsideLink: true,
     link: "https://c4.bigstoneaudio.com",
     github: "https://github.com/alexthehaszard/connect-4-arena",
   },
@@ -71,7 +77,11 @@ function showProject(number, dot) {
     card.appendChild(projectButtons);
 
     openProject.classList = "buttons";
-    openProject.setAttribute("href", dot + projects[i].link);
+    if (projects[i].outsideLink === false) {
+      openProject.setAttribute("href", dot + projects[i].link);
+    } else {
+      openProject.setAttribute("href", projects[i].link);
+    }
     projectButtons.appendChild(openProject);
 
     viewCode.classList = "buttons";
