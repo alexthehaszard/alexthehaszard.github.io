@@ -9,7 +9,7 @@ projects = [
   },
   {
     name: "fortnite poi generator",
-    photo: "images/poigen600x300.png",
+    photo: "images/tictactoe600x300.png",
     outsideLink: false,
     link: "poiGen/",
     github:
@@ -17,7 +17,7 @@ projects = [
   },
   {
     name: "tictactoe",
-    photo: "images/tictactoe600x300.png",
+    photo: "images/poigen600x300.png",
     outsideLink: false,
     link: "tictactoe/",
     github:
