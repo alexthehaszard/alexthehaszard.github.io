@@ -1,11 +1,26 @@
 projects = [
   {
+    name: "connect 4 arena",
+    photo: "images/c4-600x300.png",
+    outsideLink: true,
+    link: "https://connect4arena.ts.r.appspot.com/",
+    github: "https://github.com/alexthehaszard/connect-4-arena",
+  },
+  {
     name: "rubik's cube timer",
     photo: "images/cubetimer600x300.png",
     outsideLink: false,
     link: "cubeTimer/",
     github:
       "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/cubeTimer",
+  },
+  {
+    name: "pathfinding visualizer",
+    photo: "images/pathfinding600x300.png",
+    outsideLink: false,
+    link: "pathfindingVisualizer/",
+    github:
+      "https://github.com/alexthehaszard/pathfindingAlgorithm/tree/master",
   },
   {
     name: "fortnite poi generator",
@@ -24,26 +39,11 @@ projects = [
       "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/ticTacToe",
   },
   {
-    name: "pathfinding visualizer",
-    photo: "images/pathfinding600x300.png",
-    outsideLink: false,
-    link: "pathfindingVisualizer/",
-    github:
-      "https://github.com/alexthehaszard/pathfindingAlgorithm/tree/master",
-  },
-  {
     name: "jacks (card game)",
     photo: "images/jacks600x300.png",
     outsideLink: false,
     link: "jacks/",
     github: "https://github.com/alexthehaszard/jacks",
-  },
-  {
-    name: "connect 4 arena",
-    photo: "images/c4-600x300.png",
-    outsideLink: true,
-    link: "https://connect4arena.ts.r.appspot.com/",
-    github: "https://github.com/alexthehaszard/connect-4-arena",
   },
 ];
 
