@@ -71,6 +71,7 @@ function showProject(number, dot) {
 
     img.setAttribute("src", dot + projects[i].photo);
     img.classList = "project-image";
+    img.alt = "project image";
     a.appendChild(img);
 
     projectButtons.classList = "project-buttons";
