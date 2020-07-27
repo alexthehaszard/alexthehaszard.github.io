@@ -66,7 +66,6 @@ function showProject(number, dot) {
     p.classList = "project-title";
     card.appendChild(p);
 
-    a.setAttribute("href", dot + projects[i].link);
     card.appendChild(a);
 
     img.setAttribute("src", dot + projects[i].photo);
@@ -80,8 +79,10 @@ function showProject(number, dot) {
     openProject.classList = "buttons";
     if (projects[i].outsideLink === false) {
       openProject.setAttribute("href", dot + projects[i].link);
+      a.setAttribute("href", dot + projects[i].link);
     } else {
       openProject.setAttribute("href", projects[i].link);
+      a.setAttribute("href", projects[i].link);
     }
     projectButtons.appendChild(openProject);
 
