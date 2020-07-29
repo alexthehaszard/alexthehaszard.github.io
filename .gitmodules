@@ -1,3 +1,6 @@
 [submodule "pathfindingVisualizer"]
 	path = pathfindingVisualizer
 	url = https://github.com/alexthehaszard/pathfindingAlgorithm.git
+[submodule "jacks"]
+	path = jacks
+	url = https://github.com/alexthehaszard/jacks.git
