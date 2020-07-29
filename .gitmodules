@@ -1,0 +1,3 @@
+[submodule "pathfindingVisualizer"]
+	path = pathfindingVisualizer
+	url = https://github.com/alexthehaszard/pathfindingAlgorithm.git
