@@ -3,4 +3,7 @@
 	url = https://github.com/alexthehaszard/pathfindingAlgorithm.git
 [submodule "jacks"]
 	path = jacks
-	url = https://github.com/alexthehaszard/jacks.git
+	url = https://github.com/alexthehaszard/jacks
+[submodule "cubeTimer"]
+	path = cubeTimer
+	url = https://github.com/alexthehaszard/cubeTimer.git
