@@ -45,6 +45,13 @@ projects = [
     link: "jacks/",
     github: "https://github.com/alexthehaszard/jacks",
   },
+  {
+    name: "conway's game of life",
+    photo: "images/conways600x300.png",
+    outsideLink: false,
+    link: "conways-game-of-life/",
+    github: "https://github.com/alexthehaszard/conways-game-of-life",
+  },
 ];
 
 function showProject(number, dot) {

@@ -7,3 +7,6 @@
 [submodule "cubeTimer"]
 	path = cubeTimer
 	url = https://github.com/alexthehaszard/cubeTimer.git
+[submodule "conways-game-of-life"]
+	path = conways-game-of-life
+	url = https://github.com/alexthehaszard/conways-game-of-life.git
