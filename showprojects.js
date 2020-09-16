@@ -52,6 +52,13 @@ projects = [
     link: "conways-game-of-life/",
     github: "https://github.com/alexthehaszard/conways-game-of-life",
   },
+  {
+    name: "aim trainer",
+    photo: "images/aim-trainer600x300.png",
+    outsideLink: false,
+    link: "aim-trainer/",
+    github: "https://github.com/alexthehaszard/aim-trainer",
+  },
 ];
 
 function showProject(number, dot) {

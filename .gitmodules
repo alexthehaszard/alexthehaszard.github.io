@@ -10,3 +10,6 @@
 [submodule "conways-game-of-life"]
 	path = conways-game-of-life
 	url = https://github.com/alexthehaszard/conways-game-of-life.git
+[submodule "aim-trainer"]
+	path = aim-trainer
+	url = https://github.com/alexthehaszard/aim-trainer.git
