@@ -18,7 +18,7 @@ projects = [
     name: "wiki race",
     photo: "images/wikirace600x300.png",
     outsideLink: true,
-    link: "https://enigmatic-cliffs-68170.herokuapp.com/",
+    link: "http://enigmatic-cliffs-68170.herokuapp.com/",
     github: "https://github.com/alexthehaszard/",
   },
   {
