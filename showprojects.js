@@ -15,6 +15,13 @@ projects = [
       "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/cubeTimer",
   },
   {
+    name: "wiki race",
+    photo: "images/wikirace600x300.png",
+    outsideLink: true,
+    link: "https://enigmatic-cliffs-68170.herokuapp.com/",
+    github: "https://github.com/alexthehaszard/",
+  },
+  {
     name: "pathfinding visualizer",
     photo: "images/pathfinding600x300.png",
     outsideLink: false,
