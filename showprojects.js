@@ -30,14 +30,6 @@ projects = [
       "https://github.com/alexthehaszard/pathfindingAlgorithm/tree/master",
   },
   {
-    name: "fortnite poi generator",
-    photo: "images/tictactoe600x300.png",
-    outsideLink: false,
-    link: "poiGen/",
-    github:
-      "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/poiGen",
-  },
-  {
     name: "tictactoe",
     photo: "images/poigen600x300.png",
     outsideLink: false,
