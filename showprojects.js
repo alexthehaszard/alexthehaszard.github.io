@@ -7,12 +7,11 @@ projects = [
     github: "https://github.com/alexthehaszard/connect-4-arena",
   },
   {
-    name: "rubik's cube timer",
-    photo: "images/cubetimer600x300.png",
+    name: "wing it",
+    photo: "images/kiwi600x300.png",
     outsideLink: false,
-    link: "cubeTimer/",
-    github:
-      "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/cubeTimer",
+    link: "wing-it/",
+    github: "https://github.com/alexthehaszard/",
   },
   {
     name: "wiki race",
@@ -20,6 +19,14 @@ projects = [
     outsideLink: true,
     link: "http://enigmatic-cliffs-68170.herokuapp.com/",
     github: "https://github.com/alexthehaszard/",
+  },
+  {
+    name: "rubik's cube timer",
+    photo: "images/cubetimer600x300.png",
+    outsideLink: false,
+    link: "cubeTimer/",
+    github:
+      "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/cubeTimer",
   },
   {
     name: "pathfinding visualizer",
