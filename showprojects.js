@@ -1,12 +1,5 @@
 projects = [
   {
-    name: "connect 4 arena",
-    photo: "images/c4-600x300.png",
-    outsideLink: true,
-    link: "https://connect4arena.ts.r.appspot.com/",
-    github: "https://github.com/alexthehaszard/connect-4-arena",
-  },
-  {
     name: "wing it",
     photo: "images/kiwi600x300.png",
     outsideLink: false,
