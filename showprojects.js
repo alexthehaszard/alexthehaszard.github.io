@@ -30,14 +30,6 @@ projects = [
       "https://github.com/alexthehaszard/pathfindingAlgorithm/tree/master",
   },
   {
-    name: "tictactoe",
-    photo: "images/poigen600x300.png",
-    outsideLink: false,
-    link: "tictactoe/",
-    github:
-      "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/ticTacToe",
-  },
-  {
     name: "jacks (card game)",
     photo: "images/jacks600x300.png",
     outsideLink: false,
