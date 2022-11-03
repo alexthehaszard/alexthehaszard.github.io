@@ -4,7 +4,7 @@ projects = [
     photo: "images/kiwi600x300.png",
     outsideLink: false,
     link: "wing-it/",
-    github: "https://github.com/alexthehaszard/",
+    github: "",
   },
   {
     name: "wiki race",
@@ -90,7 +90,11 @@ function showProject(number, dot) {
     projectButtons.appendChild(openProject);
 
     viewCode.classList = "buttons";
-    viewCode.setAttribute("href", projects[i].github);
+    if (projects[i].github == "") {
+      viewCode.classList += " button-disabled";
+    } else {
+      viewCode.setAttribute("href", projects[i].github);
+    }
     projectButtons.appendChild(viewCode);
 
     openProjectText.innerHTML = "open project";
