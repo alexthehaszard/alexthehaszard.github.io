@@ -11,23 +11,21 @@ projects = [
     photo: "images/wikirace600x300.png",
     outsideLink: true,
     link: "http://enigmatic-cliffs-68170.herokuapp.com/",
-    github: "https://github.com/alexthehaszard/",
+    github: "https://github.com/alexthehaszard/wiki-game",
   },
   {
     name: "rubik's cube timer",
     photo: "images/cubetimer600x300.png",
     outsideLink: false,
     link: "cubeTimer/",
-    github:
-      "https://github.com/alexthehaszard/alexthehaszard.github.io/tree/master/cubeTimer",
+    github: "https://github.com/alexthehaszard/cubeTimer",
   },
   {
     name: "pathfinding visualizer",
     photo: "images/pathfinding600x300.png",
     outsideLink: false,
     link: "pathfindingVisualizer/",
-    github:
-      "https://github.com/alexthehaszard/pathfindingAlgorithm/tree/master",
+    github: "https://github.com/alexthehaszard/pathfindingAlgorithm",
   },
   {
     name: "jacks (card game)",
