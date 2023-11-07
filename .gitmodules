@@ -13,3 +13,6 @@
 [submodule "aim-trainer"]
 	path = aim-trainer
 	url = https://github.com/alexthehaszard/aim-trainer.git
+[submodule "yahtzee"]
+	path = yahtzee
+	url = https://github.com/alexthehaszard/yahtzee.git
